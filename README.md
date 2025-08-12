@@ -13,6 +13,7 @@ It is a [Maven](https://maven.apache.org/) based project, so you can open this p
  * `cdk synth`       emits the synthesized CloudFormation template
  * `cdk deploy`      deploy this stack to your default AWS account/region
  * `cdk diff`        compare deployed stack with current state
+ * `cdk synth > template.yaml`    create template.yaml file
  * `cdk docs`        open CDK documentation
 
 Enjoy!
