@@ -8,6 +8,18 @@ It is a [Maven](https://maven.apache.org/) based project, so you can open this p
 
 ## Useful commands
 
+for localstack
+
+* `mvn package`     compile and run tests
+* `cdklocal ls`          list all stacks in the app
+* `cdklocal synth`       emits the synthesized CloudFormation template
+* `cdklocal deploy`      deploy this stack to your default AWS account/region
+* `cdklocal diff`        compare deployed stack with current state
+* `cdklocal synth > template.yaml`    create template.yaml file
+* `cdklocal docs`        open CDK documentation
+
+for aws cdk
+
  * `mvn package`     compile and run tests
  * `cdk ls`          list all stacks in the app
  * `cdk synth`       emits the synthesized CloudFormation template
