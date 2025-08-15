@@ -84,6 +84,10 @@ public class AwsLamdaGatewayRest extends Stack {
         // Define a root resource for the API (e.g., '/hello').
         final IResource apiRoot = api.getRoot();
 
+        // Map the root path of the API Gateway to the Lambda.
+        // This handles requests to the base URL, e.g., https://<api-id>.execute-api.<region>.amazonaws.com/dev
+        api.getRoot().addMethod("ANY", lambdaIntegration);
+
         // Add a proxy resource '{proxy+}', which captures all paths under the root.
         // This is a common pattern for proxying all requests to a single backend.
         // Add a catch-all method (ANY) to the proxy resource.
