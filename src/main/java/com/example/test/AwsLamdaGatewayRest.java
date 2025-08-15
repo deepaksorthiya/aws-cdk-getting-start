@@ -1,20 +1,18 @@
 package com.example.test;
 
 import software.amazon.awscdk.*;
-import software.amazon.awscdk.services.apigateway.LambdaIntegration;
-import software.amazon.awscdk.services.apigateway.ProxyResourceOptions;
-import software.amazon.awscdk.services.apigateway.RestApi;
+import software.amazon.awscdk.services.apigateway.*;
+import software.amazon.awscdk.services.apigateway.IResource;
 import software.amazon.awscdk.services.lambda.Code;
 import software.amazon.awscdk.services.lambda.Function;
 import software.amazon.awscdk.services.lambda.Runtime;
-import software.amazon.awscdk.services.sqs.Queue;
 import software.constructs.Construct;
 
 public class AwsLamdaGatewayRest extends Stack {
 
     public static void main(final String[] args) {
         App app = new App(AppProps.builder().outdir("./cdk.out").build());
-        new AwsLamdaGatewayRest(app, "AwsLamdaGatewayRest", StackProps.builder()
+        new AwsLamdaGatewayRest(app, "AwsSpringBootLambdaGatewayRest", StackProps.builder()
                 // If you don't specify 'env', this stack will be environment-agnostic.
                 // Account/Region-dependent features and context lookups will not work,
                 // but a single synthesized template can be deployed anywhere.
@@ -49,29 +47,52 @@ public class AwsLamdaGatewayRest extends Stack {
 
         // The code that defines your stack goes here
 
-        // Lambda function (Spring Boot fat JAR)
-        Function springLambda = Function.Builder.create(this, "SpringLambda")
+        // This is a placeholder path to your Spring Boot application's JAR file.
+        // The `cdk.out` directory is the default output for the CDK.
+        // We will be building our Spring Boot app to a JAR file and referencing it here.
+        final String handlerPath = "E:\\worksspaces\\aws-localstack\\aws\\aws-lamda\\aws-lamda-spring\\target\\aws-lamda-spring-1.0.0-SNAPSHOT-lambda-package.zip";
+
+        // Create the Lambda function.
+        // We use Runtime.JAVA_21 which is the latest LTS version supported by AWS.
+        // The handler is set to the Spring Cloud Function entry point.
+        final Function apiLambda = Function.Builder.create(this, "SpringLambda")
                 .runtime(Runtime.JAVA_21)
-                .handler("com.example.LambdaHandler::handleRequest")
+                .handler("com.example.StreamLambdaHandler::handleRequest")
                 .memorySize(1024)
                 .timeout(Duration.seconds(30))
-                .code(Code.fromAsset("target/aws-cdk-getting-start-1.0.0-SNAPSHOT.jar")) // Path to your
-                // built JAR
+                .code(Code.fromAsset(handlerPath))
                 .build();
 
-        // API Gateway REST API
-        RestApi api = RestApi.Builder.create(this, "SpringApi")
-                .restApiName("Spring Lambda API")
-                .description("API Gateway with Spring Boot Lambda integration")
+        // Create the REST API gateway and deployment stage
+        final RestApi api =
+                RestApi.Builder.create(this, "SpringRestApi")
+                        .restApiName("Spring Serverless API")
+                        .description("This API is a serverless backend for a Spring Boot application.")
+                        .deployOptions(StageOptions.builder()
+                                .stageName("dev")
+                                .build())
+                        .build();
+
+        // Create an integration between the Lambda function and the API Gateway.
+        // This will be a proxy integration, meaning all requests and responses
+        // are passed directly between the API Gateway and Lambda without any
+        // mapping templates.
+        final LambdaIntegration lambdaIntegration = LambdaIntegration.Builder
+                .create(apiLambda)
                 .build();
 
-        // Add /api resource
-        var apiResource = api.getRoot().addResource("api");
+        // Define a root resource for the API (e.g., '/hello').
+        final IResource apiRoot = api.getRoot();
 
-        // Proxy all requests under /api to Lambda
-        LambdaIntegration lambdaIntegration = LambdaIntegration.Builder.create(springLambda).build();
-        apiResource
-                .addProxy(ProxyResourceOptions.builder().defaultIntegration(lambdaIntegration).anyMethod(true).build());
+        // Add a proxy resource '{proxy+}', which captures all paths under the root.
+        // This is a common pattern for proxying all requests to a single backend.
+        // Add a catch-all method (ANY) to the proxy resource.
+        // The 'ANY' method handles all HTTP verbs (GET, POST, PUT, DELETE, etc.).
+        apiRoot
+                .addProxy(ProxyResourceOptions.builder()
+                        .defaultIntegration(lambdaIntegration)
+                        .anyMethod(true).
+                        build());
 
     }
 
