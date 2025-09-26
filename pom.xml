@@ -15,7 +15,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>24</java.version>
         <maven.surefire.plugin>3.5.4</maven.surefire.plugin>
-        <maven.compiler.plugin>3.14.0</maven.compiler.plugin>
+        <maven.compiler.plugin>3.14.1</maven.compiler.plugin>
         <maven.source.plugin>3.3.1</maven.source.plugin>
         <junit-bom.version>5.13.4</junit-bom.version>
         <logback.version>1.5.18</logback.version>
