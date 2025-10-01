@@ -19,7 +19,7 @@
         <maven.source.plugin>3.3.1</maven.source.plugin>
         <junit-bom.version>6.0.0</junit-bom.version>
         <logback.version>1.5.19</logback.version>
-        <aws.cdk.version>2.217.0</aws.cdk.version>
+        <aws.cdk.version>2.218.0</aws.cdk.version>
         <awssdk.bom>2.34.3</awssdk.bom>
         <exec.maven.plugin.version>3.6.0</exec.maven.plugin.version>
     </properties>
