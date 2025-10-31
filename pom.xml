@@ -17,7 +17,7 @@
         <maven.surefire.plugin>3.5.4</maven.surefire.plugin>
         <maven.compiler.plugin>3.14.1</maven.compiler.plugin>
         <maven.source.plugin>3.3.1</maven.source.plugin>
-        <junit-bom.version>6.0.0</junit-bom.version>
+        <junit-bom.version>6.0.1</junit-bom.version>
         <logback.version>1.5.20</logback.version>
         <aws.cdk.version>2.221.0</aws.cdk.version>
         <awssdk.bom>2.36.2</awssdk.bom>
