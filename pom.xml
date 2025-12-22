@@ -21,7 +21,7 @@
         <logback.version>1.5.22</logback.version>
         <aws.cdk.version>2.233.0</aws.cdk.version>
         <awssdk.bom>2.40.0</awssdk.bom>
-        <exec.maven.plugin.version>3.6.2</exec.maven.plugin.version>
+        <exec.maven.plugin.version>3.6.3</exec.maven.plugin.version>
     </properties>
 
     <dependencyManagement>
