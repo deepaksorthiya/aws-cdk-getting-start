@@ -13,7 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>24</java.version>
+        <java.version>25</java.version>
         <maven.surefire.plugin>3.5.4</maven.surefire.plugin>
         <maven.compiler.plugin>3.14.1</maven.compiler.plugin>
         <maven.source.plugin>3.4.0</maven.source.plugin>
