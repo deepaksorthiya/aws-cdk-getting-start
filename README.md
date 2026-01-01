@@ -11,7 +11,8 @@ IDE to build and run tests.
 
 for localstack
 
-* `mvn package`     compile and run tests
+* `mvn clean package`     compile and run tests
+* `mvn exec:java` for running main class configured in pom.xml
 * `cdklocal ls`          list all stacks in the app
 * `cdklocal synth`       emits the synthesized CloudFormation template
 * `cdklocal bootstrap`   bootstrap env
@@ -23,7 +24,8 @@ for localstack
 
 for aws cdk
 
-* `mvn package`     compile and run tests
+* `mvn clean package`     compile and run tests
+* `mvn exec:java` for running main class configured in pom.xml
 * `cdk ls`          list all stacks in the app
 * `cdk synth`       emits the synthesized CloudFormation template
 * `cdk bootstrap`   bootstrap env
