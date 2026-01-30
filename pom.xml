@@ -18,7 +18,7 @@
         <maven.compiler.plugin>3.14.1</maven.compiler.plugin>
         <maven.source.plugin>3.4.0</maven.source.plugin>
         <junit-bom.version>6.0.2</junit-bom.version>
-        <logback.version>1.5.26</logback.version>
+        <logback.version>1.5.27</logback.version>
         <aws.cdk.version>2.236.0</aws.cdk.version>
         <awssdk.bom>2.41.0</awssdk.bom>
         <exec.maven.plugin.version>3.6.3</exec.maven.plugin.version>
